@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Ticket Booking System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>&#128652; Bus Ticket Booking</h1>
+        <p>C Programming Project 20 - Web Version</p>
+    </header>
+
+    <nav class="no-print">
+        <button id="btn-routes" onclick="showSection('routes')">Routes</button>
+        <button id="btn-book" onclick="showSection('book')">Book Ticket</button>
+        <button id="btn-mybooking" onclick="showSection('mybooking')">My Booking</button>
+        <button id="btn-records" onclick="showSection('records')">All Records</button>
+    </nav>
+
+    <div class="container">
+
+        <!-- routes -->
+        <div id="routes" class="section">
+            <h2>Available Routes</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>No</th><th>From</th><th>To</th><th>Departure</th><th>Bus Type</th><th>Fare</th><th></th></tr>
+                    </thead>
+                    <tbody id="routeTable"></tbody>
+                </table>
+            </div>
+            <p class="note">Every bus has 40 seats (2+2 seating). A and D are window seats. Max 5 seats in one booking.</p>
+        </div>
+
+        <!-- booking -->
+        <div id="book" class="section">
+            <h2>Book Ticket</h2>
+            <div class="row">
+                <div class="col">
+                    <label>Route</label>
+                    <select id="routeSelect" onchange="hideSeats()"></select>
+                </div>
+                <div class="col">
+                    <label>Travel Date</label>
+                    <input type="date" id="travelDate" onchange="hideSeats()">
+                </div>
+            </div>
+            <button class="btn" onclick="loadSeats()">Show Seats</button>
+
+            <div id="seatArea">
+                <div class="seat-layout">
+                    <div id="busBox" class="bus"></div>
+
+                    <div class="side">
+                        <div class="legend">
+                            <span><i class="box"></i> Available</span>
+                            <span><i class="box sel"></i> Selected</span>
+                            <span><i class="box bkd"></i> Booked</span>
+                        </div>
+                        <p id="seatInfo"></p>
+                        <div id="passengerForms"></div>
+                        <label>Contact Number</label>
+                        <input type="text" id="phone" maxlength="10" placeholder="10 digit mobile number">
+                        <p id="totalFare" class="fare"></p>
+                        <button class="btn green" onclick="bookTicket()">Book Ticket</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="bookMsg"></div>
+        </div>
+
+        <!-- my booking -->
+        <div id="mybooking" class="section">
+            <h2>My Booking</h2>
+            <label>Ticket No or Phone Number</label>
+            <input type="text" id="searchBox" placeholder="eg. 5001 or 9876543210">
+            <button class="btn" onclick="searchBooking()">Search</button>
+            <p class="note">Cancellation charge is 10% of the fare.</p>
+            <div id="searchResult"></div>
+        </div>
+
+        <!-- all records -->
+        <div id="records" class="section">
+            <h2>All Booking Records</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Ticket</th><th>Route</th><th>Date</th><th>Seat</th><th>Name</th><th>Age</th><th>Gender</th><th>Phone</th><th>Fare</th></tr>
+                    </thead>
+                    <tbody id="recordTable"></tbody>
+                </table>
+            </div>
+            <p id="recordTotal"></p>
+
+            <div class="file-box">
+                <h3>bus_bookings.txt</h3>
+                <p class="note">Load the file made by the C program, or download these records in the same format so the C program can read them.</p>
+                <input type="file" id="fileInput" accept=".txt">
+                <button class="btn" onclick="importFile()">Load File</button>
+                <button class="btn" onclick="downloadFile()">Download File</button>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="no-print">Made by Piyush Kumar | C Programming Project</footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
